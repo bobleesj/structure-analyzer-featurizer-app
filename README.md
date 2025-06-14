@@ -2,9 +2,9 @@
 
 This is a command-line interactive app for `SAF` that allows you to generate features easily.
 
-> For more information, please visit https://github.com/bobleesj/structure-analyzer-featurize for the official documentation and feature list.
+> For more information, please visit https://github.com/bobleesj/structure-analyzer-featurizer for the official documentation and feature list.
 
-## Getting Started
+## Getting started
 
 Install `SAF`:
 
