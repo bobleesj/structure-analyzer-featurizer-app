@@ -1,5 +1,6 @@
 import glob
 import os
+from os.path import isfile, join
 
 
 def get_file_paths(dir_path: str, ext=".cif") -> list[str]:
@@ -31,11 +32,11 @@ def get_cif_dir_names(script_path):
         os.path.basename(d)
         for d in os.listdir(script_path)
         if os.path.isdir(os.path.join(script_path, d))
-        and not d.startswith("tests")  # Exclude directories starting with 'tests'
+        and not d.startswith("tests")
         and contains_cif_files(os.path.join(script_path, d))
     ]
     if not dir_names:
-        print("No directories found in the current path containing .cif files.")
+        print("No folders found in the current path containing .cif files.")
         return []  # Return an empty list instead of None
     return dir_names
 
@@ -43,6 +44,6 @@ def get_cif_dir_names(script_path):
 def contains_cif_files(directory):
     """Check if the specified directory contains any .cif files."""
     for file in os.listdir(directory):
-        if file.endswith(".cif") and os.path.isfile(os.path.join(directory, file)):
+        if file.endswith(".cif") and isfile(join(directory, file)):
             return True
     return False

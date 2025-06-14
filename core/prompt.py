@@ -4,7 +4,7 @@ from click import echo, style
 from core import folder
 
 
-def get_user_input_folder_processing(dir_names, file_type):
+def get_user_input_folder_select(dir_names, file_type):
     click.echo(f"\nFolders with {file_type} files:")
     for i, dir_name in enumerate(dir_names, start=1):
         file_paths = folder.get_file_paths(dir_name)
@@ -12,21 +12,20 @@ def get_user_input_folder_processing(dir_names, file_type):
     click.echo("\nWould you like to process each folder above sequentially?")
     is_sequentially_processed = click.confirm("(Default: Y)", default=True)
     if is_sequentially_processed:
-        selected_dirs = {idx: name for idx, name in enumerate(dir_names, start=1)}
+        dirs = {idx: name for idx, name in enumerate(dir_names, start=1)}
     else:
-        selected_dirs = get_folder_indices(dir_names)
-    # Print the selected folders
-    if len(selected_dirs) == len(dir_names):
+        dirs = get_folder_indices(dir_names)
+    if len(dirs) == len(dir_names):
         click.echo("> Good! Let's process all the folders.")
     else:
         click.echo("> Good! You've chosen the following folders:")
-        for i, dir_name in selected_dirs.items():
+        for i, dir_name in dirs.items():
             click.echo(f"{i}. {dir_name}")
 
-    return selected_dirs
+    return dirs
 
 
-def get_folder_indices(dir_names_with_cif):
+def get_folder_indices(dirs_with_cif):
     while True:
         folder_numbers_str = click.prompt(
             "Enter the numbers corresponding to the folders listed above,"
@@ -36,17 +35,14 @@ def get_folder_indices(dir_names_with_cif):
             folder_indices = list(
                 set(int(number) for number in folder_numbers_str.split())
             )
-
             # Check if all entered indices are valid
-            if not all(1 <= idx <= len(dir_names_with_cif) for idx in folder_indices):
-                raise ValueError("One or more numbers are out of the valid range.")
+            if not all(1 <= i <= len(dirs_with_cif) for i in folder_indices):
+                raise ValueError("Out of valid range.")
             # Map the indices to directory names
-            selected_dirs = {idx: dir_names_with_cif[idx - 1] for idx in folder_indices}
+            selected_dirs = {i: dirs_with_cif[i - 1] for i in folder_indices}
             return selected_dirs
         except ValueError:
-            click.echo(
-                "Please enter only valid numbers within the range, separated by spaces."
-            )
+            click.echo("Please enter valid numbers, separated by spaces.")
 
 
 def prompt_folder_progress(i, dir_name, dirs_total_count):

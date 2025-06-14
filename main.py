@@ -1,5 +1,6 @@
 import os
 import time
+from os.path import join
 
 from cifkit import Cif
 from cifkit.utils.folder import get_file_paths
@@ -16,9 +17,8 @@ from core import folder, prompt
 # Choose the folder
 def main():
     script_path = os.path.dirname(os.path.abspath(__file__))
-    dir_names_with_cif = folder.get_cif_dir_names(script_path)
-    selected_dirs = prompt.get_user_input_folder_processing(dir_names_with_cif, ".cif")
-
+    dir_names = folder.get_cif_dir_names(script_path)
+    selected_dirs = prompt.get_user_input_folder_select(dir_names, ".cif")
     num_selected_dirs = len(selected_dirs)
     for idx, (_, dir_path) in enumerate(selected_dirs.items(), start=1):
         prompt.prompt_folder_progress(idx, dir_path, num_selected_dirs)
@@ -62,11 +62,11 @@ def process_cifs(dir_path):
             cif.file_name, cif.supercell_atom_count, elapsed_time
         )
     # Save
-    csv_folder_path = os.path.join(dir_path, "csv")
-    binary_csv_path = os.path.join(csv_folder_path, "binary_features.csv")
-    ternary_csv_path = os.path.join(csv_folder_path, "ternary_features.csv")
-    quaternary_csv_path = os.path.join(csv_folder_path, "quaternary_features.csv")
-    universal_csv_path = os.path.join(csv_folder_path, "universal_features.csv")
+    csv_folder_path = join(dir_path, "csv")
+    binary_csv_path = join(csv_folder_path, "binary_features.csv")
+    ternary_csv_path = join(csv_folder_path, "ternary_features.csv")
+    quaternary_csv_path = join(csv_folder_path, "quaternary_features.csv")
+    universal_csv_path = join(csv_folder_path, "universal_features.csv")
     os.makedirs(csv_folder_path, exist_ok=True)
     if binary_data:
         df(binary_data).round(3).to_csv(binary_csv_path)
