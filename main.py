@@ -1,14 +1,16 @@
 import os
 import time
-from SAF.features.generator import (
-    compute_binary_features,
-    compute_ternary_features,
-    compute_quaternary_features,
-)
-from core import folder, prompt
-from pandas import DataFrame as df
+
 from cifkit import Cif
 from cifkit.utils.folder import get_file_paths
+from pandas import DataFrame as df
+from SAF.features.generator import (
+    compute_binary_features,
+    compute_quaternary_features,
+    compute_ternary_features,
+)
+
+from core import folder, prompt
 
 
 # Choose the folder

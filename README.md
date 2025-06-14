@@ -26,8 +26,7 @@ Folders with .cif files detected:
 2. 20240902_ICSD_demo_files (20 files)
 
 Would you like to process each folder above sequentially?
-(Default: Y) [Y/n]: 
+(Default: Y) [Y/n]:
 ```
 
 At the end, `.csv` files will be saved in the chosen project directory, including `csv/<composition-type>_features.csv` and `csv/universal_features.csv`.
-
