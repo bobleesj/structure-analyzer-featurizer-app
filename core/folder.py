@@ -4,7 +4,8 @@ from os.path import isfile, join
 
 
 def get_file_paths(dir_path: str, ext=".cif") -> list[str]:
-    """Return a list of file paths with a given extension from a directory."""
+    """Return a list of file paths with a given extension from a
+    directory."""
     return glob.glob(os.path.join(dir_path, f"*{ext}"))
 
 
@@ -23,8 +24,8 @@ def make_output_folder(dir_path: str, new_folder_name: str) -> str:
 
 
 def get_cif_dir_names(script_path):
-    """Return a list of directory names containing .cif files, excluding those
-    starting with 'tests'.
+    """Return a list of directory names containing .cif files, excluding
+    those starting with 'tests'.
 
     Directory names are relative to the script_path.
     """
