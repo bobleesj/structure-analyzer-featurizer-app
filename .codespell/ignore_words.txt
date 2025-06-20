@@ -12,3 +12,5 @@ CAF
 Te
 Nd
 ThOs
+ThGe
+DyIn
