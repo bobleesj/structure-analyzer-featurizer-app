@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* No news added: Add empty changelog.rst.
 
 **Changed:**
 
@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* Add empty changelog.rst.
+* <news item>
 
 **Security:**
 
